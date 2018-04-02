@@ -1,0 +1,103 @@
+<html>
+ <body>
+   <canvas id="canvas" ></canvas>
+ </body>
+ <script>
+ 
+ 
+function drawPattern(x,y){
+  var cx=0,cy=0;
+  console.log(x)
+    var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+ canvas.height = window.innerHeight;
+    if(window.innerWidth >1300){
+   
+      var centerX =0;
+var centerY = 0;
+var width=canvas.width/4;
+var height=canvas.width/4;
+
+var chnage=40;
+}
+else
+{
+var stepsY=canvas.height/10;
+var stepsX=canvas.width/10;
+  var centerX =0;
+var centerY = 0;
+var width=canvas.width/2;
+var height=canvas.width/2;
+var chnage=40;
+centerX=centerX+(-(Math.round(x)*stepsX));
+centerY=centerY+(Math.round(y)*stepsY);
+if(centerY<0)
+centerY=0;
+if(centerX<0)
+centerX=0;
+if(centerX+width >canvas.width)
+centerX=canvas.width-width;
+if(centerY+height >canvas.height)
+centerY=canvas.height-height;
+
+  
+
+}
+ //canvas.width,canvas.height)
+
+//rotationAngleate 45
+//ctx.rotate(45* Math.PI / 180);
+
+
+for(i=1;i<=9;i++){
+  //console.log( centerX, centerY, width, height)
+    if(i%2!=0){
+      ctx.fillStyle = "black";
+    ctx.fillRect(centerX, centerY, width, height);
+    }
+    else{
+      ctx.fillStyle = "rgba(255, 255, 255, 0.952)";
+    ctx.fillRect(centerX, centerY, width, height);
+    }
+    centerY=centerY+20;
+    centerX=centerX+20;
+    width=Math.abs(width-(chnage));
+    height=Math.abs(height-(chnage));
+}
+}
+
+}
+function onDeviceMotion(event){
+    var x = event.accelerationIncludingGravity.x;
+    var y = event.accelerationIncludingGravity.y;
+    var z = event.acceleration.z;
+    setInterval(function(){x=x+5},3000);
+
+    
+
+    window.requestAnimationFrame(function(){ drawPattern(x,y) });
+}
+
+
+window.addEventListener("devicemotion", onDeviceMotion, false);
+
+
+
+
+ </script>
+  
+
+<style>
+body{
+   margin: 0;
+   background-color: gainsboro;
+
+}
+@media only screen and (max-width: 768px) {
+#canvas{
+   background-color: blue;
+}}
+</style>
+</html>
